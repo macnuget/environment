@@ -21,6 +21,8 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     restart: unless-stopped
+    links:
+      - postgres
     environment:
       - PGADMIN_DEFAULT_EMAIL=default@user.it
       - PGADMIN_DEFAULT_PASSWORD=password
@@ -28,6 +30,19 @@ services:
       - postgres
     ports:
       - 5050:80
+    networks:
+      - default
+
+  rabbit:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    restart: unless-stopped
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=password
     networks:
       - default
 
