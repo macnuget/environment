@@ -4,7 +4,7 @@ set -e
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
 	-- Products table
 	CREATE TABLE "Products"(
-	    "Id" serial  PRIMARY KEY,
+	    "Id" int  PRIMARY KEY,
 	    "Name" varchar(128) NOT NULL,
 	    "Quantity" int DEFAULT 0,
 	    "Available" boolean DEFAULT false
